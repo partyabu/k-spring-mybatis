@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abucloud.mapper.UserInfoMapper">
+
+    <resultMap id="userInfoMap" type="com.abucloud.bo.UserInfoBO">
+        <id column="user_id" property="userId"/>
+        <collection property="loginAccountList" ofType="com.abucloud.entity.TbUserInfo">
+            <id column="user_id" property="userId"/>
+            <result column="login_account" property="loginAccount"/>
+        </collection>
+    </resultMap>
+
+    <sql id="selectListSql">
+         SELECT
+            *
+        FROM
+            tb_user_info
+    </sql>
+
+    <select id="selectList" resultMap="userInfoMap">
+        <include refid="selectListSql"></include>
+    </select>
+    <select id="selectOne" resultType="com.abucloud.entity.TbUserInfo">
+       SELECT
+        *
+       FROM
+        tb_user_info
+       WHERE
+        user_id = #{userId}
+    </select>
+</mapper>
