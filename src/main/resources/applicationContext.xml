@@ -29,6 +29,13 @@
             </bean>
         </property>
 
+        <!-- 注意其他配置 -->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor"/>
+            </array>
+        </property>
+
         <!--起别名-->
         <property name="typeAliasesPackage" value="com/abucloud/entity"/>
     </bean>

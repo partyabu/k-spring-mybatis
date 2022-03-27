@@ -1,6 +1,7 @@
 package com.abucloud.service.impl;
 
 import com.abucloud.bo.UserInfoBO;
+import com.abucloud.bo.UserRoleBO;
 import com.abucloud.entity.TbUserInfo;
 import com.abucloud.mapper.UserInfoMapper;
 import com.abucloud.service.UserService;
@@ -29,5 +30,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public TbUserInfo selectOne(Integer id) {
         return this.userInfoMapper.selectOne(id);
+    }
+
+    @Override
+    public List<UserRoleBO> selectRoleByCondition(TbUserInfo userInfo) {
+        return this.userInfoMapper.selectRoleByCondition(userInfo);
     }
 }

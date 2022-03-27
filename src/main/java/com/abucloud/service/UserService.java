@@ -1,5 +1,6 @@
 package com.abucloud.service;
 
+import com.abucloud.bo.UserRoleBO;
 import com.abucloud.bo.UserInfoBO;
 import com.abucloud.entity.TbUserInfo;
 
@@ -15,5 +16,8 @@ public interface UserService {
     List<UserInfoBO> selectList();
 
     TbUserInfo selectOne(Integer id);
+
+    List<UserRoleBO> selectRoleByCondition(TbUserInfo userInfo);
+
 
 }
