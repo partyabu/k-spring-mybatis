@@ -4,6 +4,7 @@ import com.abucloud.entity.TbUserInfo;
 import com.abucloud.service.UserService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -17,11 +18,20 @@ import java.util.List;
  */
 public class TestSpringMybatis {
 
+    private ApplicationContext ac;
+
+    @Before
+    public void beforeExecute() {
+        // 获取ioc容器
+        ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+    }
+
     @Test
     public void test01() {
 
         // 获取ioc容器
-        ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 
         // 获取bean实例
         UserService userService = ac.getBean(UserService.class);
@@ -46,9 +56,11 @@ public class TestSpringMybatis {
         Page<Object> objects = PageHelper
                 .startPage(2, 2)
                 .doSelectPage(() -> userService.selectRoleByCondition(tbUserInfo));
-
-
     }
 
-
+    @Test
+    public void test02() {
+        UserService userService = ac.getBean(UserService.class);
+        userService.selectOne(1);
+    }
 }
