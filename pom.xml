@@ -13,7 +13,7 @@
         <mybatis-spring-version>2.0.7</mybatis-spring-version>
         <spring-version>5.3.17</spring-version>
         <mysql-connector-version>8.0.28</mysql-connector-version>
-        <druid-version>1.2.8</druid-version>
+        <hikari-CP-version>2.14.0</hikari-CP-version>
         <junit-version>4.13.2</junit-version>
         <lombok-version>1.18.22</lombok-version>
         <pagehelper-version>5.3.0</pagehelper-version>
@@ -70,9 +70,9 @@
 
         <!--数据源-->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>${druid-version}</version>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>2.7.1</version>
         </dependency>
 
         <dependency>
