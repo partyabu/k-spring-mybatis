@@ -35,7 +35,7 @@
         <!-- 注意其他配置 -->
         <property name="plugins">
             <array>
-<!--                <bean class="com.github.pagehelper.PageInterceptor"/>-->
+                <bean class="com.github.pagehelper.PageInterceptor"/>
                 <bean class="com.abucloud.config.MyInterceptor">
                     <property name="properties">
                         <value>

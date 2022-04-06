@@ -4,24 +4,49 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.abucloud.mapper.UserInfoMapper">
 
-    <resultMap id="userInfoMap" type="com.abucloud.bo.UserInfoBO">
-        <id column="user_id" property="userId"/>
-        <collection property="loginAccountList" ofType="com.abucloud.entity.TbUserInfo">
+    <insert id="insertUser">
+
+        INSERT INTO `k-test-db`.`tb_user_info`
+        ( `user_id`, `login_account`, `password`, `username`, `dept_id`, `data_status`, `create_by`, `create_time`,
+        `update_by`, `update_time`, `record_version`, `update_count` )
+        VALUES
+            (
+            #{userId},
+            #{loginAccount},
+            #{password},
+            #{username},
+            #{deptId},
+            #{dataStatus},
+            #{createBy},
+            #{createTime},
+            #{updateBy},
+            #{updateTime},
+            #{recordVersion},
+            #{updateCount}
+            )
+
+    </insert>
+
+    <!--
+        <resultMap id="userInfoMap" type="com.abucloud.bo.UserInfoBO">
             <id column="user_id" property="userId"/>
-            <result column="login_account" property="loginAccount"/>
-        </collection>
-    </resultMap>
+            <collection property="loginAccountList" ofType="com.abucloud.entity.TbUserInfo">
+                <id column="user_id" property="userId"/>
+                <result column="login_account" property="loginAccount"/>
+            </collection>
+        </resultMap>
 
-    <sql id="selectListSql">
-         SELECT
-            *
-        FROM
-            tb_user_info
-    </sql>
+        <sql id="selectListSql">
+             SELECT
+                *
+            FROM
+                tb_user_info
+        </sql>
+    -->
 
-    <select id="selectList" resultMap="userInfoMap">
-        <include refid="selectListSql"></include>
-    </select>
+    <!--  <select id="selectList" resultMap="userInfoMap">
+          <include refid="selectListSql"></include>
+      </select>-->
     <select id="selectOne" resultType="com.abucloud.entity.TbUserInfo">
        SELECT
         *
@@ -30,23 +55,24 @@
        WHERE
         user_id = #{userId}
     </select>
-    <select id="selectRoleByCondition" resultType="com.abucloud.bo.UserRoleBO">
-        SELECT
-        t1.user_id,
-        t1.login_account,
-        t3.role_id,
-        t3.role_name
-        FROM
-            tb_user_info t1
-            LEFT JOIN tb_user_role_relation t2 ON t1.user_id = t2.user_id
-            LEFT JOIN tb_role_info t3 ON t2.role_id = t2.role_id
-        <where>
-            <if test="userId != null">
-               and t1.user_id = #{userId}
-            </if>
-            <if test="loginAccount != null and loginAccount != ''">
-                t1.login_account = #{loginAccount}
-            </if>
-        </where>
-    </select>
+    <!--
+     <select id="selectRoleByCondition" resultType="com.abucloud.bo.UserRoleBO">
+         SELECT
+         t1.user_id,
+         t1.login_account,
+         t3.role_id,
+         t3.role_name
+         FROM
+             tb_user_info t1
+             LEFT JOIN tb_user_role_relation t2 ON t1.user_id = t2.user_id
+             LEFT JOIN tb_role_info t3 ON t2.role_id = t2.role_id
+         <where>
+             <if test="userId != null">
+                and t1.user_id = #{userId}
+             </if>
+             <if test="loginAccount != null and loginAccount != ''">
+                 t1.login_account = #{loginAccount}
+             </if>
+         </where>
+     </select>-->
 </mapper>
