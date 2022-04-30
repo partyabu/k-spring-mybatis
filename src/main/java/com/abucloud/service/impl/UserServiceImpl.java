@@ -67,7 +67,6 @@ public class UserServiceImpl implements UserService {
             userInfoMapper.insertUser(tbUserInfo);
         }
         sqlSession.close();
-        sqlSession.clearCache();
 
         return true;
     }
