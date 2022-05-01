@@ -2,6 +2,7 @@ package com.abucloud.test;
 
 import com.abucloud.entity.TbUserInfo;
 import com.abucloud.service.UserService;
+import com.abucloud.service.impl.UserServiceImpl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.junit.Before;
@@ -66,7 +67,7 @@ public class TestSpringMybatis {
 
     @Test
     public void test03() {
-        UserService userService = ac.getBean(UserService.class);
-        userService.insertUser();
+        UserServiceImpl userService = ac.getBean(UserServiceImpl.class);
+        userService.insertRoleUser();
     }
 }

@@ -26,6 +26,9 @@
             )
 
     </insert>
+    <insert id="insertOneUser">
+
+    </insert>
 
     <!--
         <resultMap id="userInfoMap" type="com.abucloud.bo.UserInfoBO">

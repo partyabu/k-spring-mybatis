@@ -19,7 +19,5 @@ public interface UserService {
 
     List<UserRoleBO> selectRoleByCondition(TbUserInfo userInfo);
 
-    boolean insertUser();
-
 
 }
