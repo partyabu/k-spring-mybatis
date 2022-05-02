@@ -19,5 +19,8 @@ public interface UserService {
 
     List<UserRoleBO> selectRoleByCondition(TbUserInfo userInfo);
 
+    void insertRoleUser();
+
+    void insertOneUser();
 
 }

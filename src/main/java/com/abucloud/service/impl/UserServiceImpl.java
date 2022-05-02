@@ -34,6 +34,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private TbRoleInfoMapper roleInfoMapper;
 
+    @Autowired
+    private UserService userService;
+
     @Override
     public List<UserInfoBO> selectList() {
         return this.userInfoMapper.selectList();
@@ -76,17 +79,23 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+
     @Transactional(rollbackFor = Exception.class)
+    @Override
     public void insertRoleUser() {
         TbRoleInfo tbRoleInfo = new TbRoleInfo();
         tbRoleInfo.setRoleName("xxx");
         tbRoleInfo.setRoleDesc("desc");
         this.roleInfoMapper.insertOneUser(tbRoleInfo);
-        this.insertOneUser();
+        this.userService.insertOneUser();
     }
 
+    /**
+     * 如果当前存在事务会抛出异常，也就是说当前 @Transactional注解会使用到
+     */
     @Transactional(rollbackFor = Exception.class)
-    protected void insertOneUser() {
+    @Override
+    public void insertOneUser() {
         TbUserInfo tbUserInfo = new TbUserInfo();
         tbUserInfo.setLoginAccount("1");
         tbUserInfo.setPassword("1");
@@ -100,7 +109,7 @@ public class UserServiceImpl implements UserService {
         tbUserInfo.setRecordVersion(0);
         tbUserInfo.setUpdateCount(0);
         this.userInfoMapper.insertUser(tbUserInfo);
+        // int a = 1 / 0;
 
-        int a = 1 / 0;
     }
 }
