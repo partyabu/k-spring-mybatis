@@ -69,4 +69,10 @@ public class TestSpringMybatis {
         UserService userService = ac.getBean(UserService.class);
         userService.insertRoleUser();
     }
+
+    @Test
+    public void test04() {
+        UserService userService = ac.getBean(UserService.class);
+        userService.insertRoleUser();
+    }
 }
