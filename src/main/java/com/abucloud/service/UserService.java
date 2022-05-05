@@ -23,4 +23,6 @@ public interface UserService {
 
     void insertOneUser();
 
+    boolean insertUser();
+
 }

@@ -52,13 +52,15 @@ public class UserServiceImpl implements UserService {
         return this.userInfoMapper.selectRoleByCondition(userInfo);
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    @Override
     public boolean insertUser() {
 
         // 指定Session为BATCH状态，不自动提交
         SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH, false);
         UserInfoMapper userInfoMapper = sqlSession.getMapper(UserInfoMapper.class);
 
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 20; i <= 30; i++) {
             TbUserInfo tbUserInfo = new TbUserInfo();
             tbUserInfo.setUserId(i);
             tbUserInfo.setLoginAccount("1");
@@ -74,8 +76,7 @@ public class UserServiceImpl implements UserService {
             tbUserInfo.setUpdateCount(0);
             userInfoMapper.insertUser(tbUserInfo);
         }
-        sqlSession.close();
-
+        sqlSession.commit();
         return true;
     }
 
