@@ -23,6 +23,6 @@ public interface UserService {
 
     void insertOneUser();
 
-    boolean insertUser();
+    void insertUser(List<TbUserInfo> userInfos, int batchSize);
 
 }

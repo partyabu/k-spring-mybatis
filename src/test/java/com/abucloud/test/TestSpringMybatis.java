@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -79,6 +81,40 @@ public class TestSpringMybatis {
     @Test
     public void testSaveBatch() {
         UserService userService = ac.getBean(UserService.class);
-        userService.insertUser();
+
+        List<TbUserInfo> userInfoList = new ArrayList<>();
+
+        TbUserInfo tbUserInfo01 = new TbUserInfo();
+        tbUserInfo01.setUserId(120);
+        tbUserInfo01.setLoginAccount("1");
+        tbUserInfo01.setPassword("1" + 120);
+        tbUserInfo01.setUsername("1");
+        tbUserInfo01.setDeptId(0);
+        tbUserInfo01.setDataStatus("1");
+        tbUserInfo01.setCreateBy("1");
+        tbUserInfo01.setCreateTime(LocalDateTime.now());
+        tbUserInfo01.setUpdateBy("1");
+        tbUserInfo01.setUpdateTime(LocalDateTime.now());
+        tbUserInfo01.setRecordVersion(0);
+        tbUserInfo01.setUpdateCount(0);
+        userInfoList.add(tbUserInfo01);
+
+
+        TbUserInfo tbUserInfo02 = new TbUserInfo();
+        tbUserInfo02.setUserId(121);
+        tbUserInfo02.setLoginAccount("1");
+        tbUserInfo02.setPassword("1" + 12212);
+        tbUserInfo02.setUsername("1");
+        tbUserInfo02.setDeptId(0);
+        tbUserInfo02.setDataStatus("1");
+        tbUserInfo02.setCreateBy("1");
+        tbUserInfo02.setCreateTime(LocalDateTime.now());
+        tbUserInfo02.setUpdateBy("1");
+        tbUserInfo02.setUpdateTime(LocalDateTime.now());
+        tbUserInfo02.setRecordVersion(0);
+        tbUserInfo02.setUpdateCount(0);
+        userInfoList.add(tbUserInfo02);
+
+        userService.insertUser(userInfoList, 1);
     }
 }

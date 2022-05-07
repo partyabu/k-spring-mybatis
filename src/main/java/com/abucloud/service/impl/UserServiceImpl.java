@@ -54,30 +54,32 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean insertUser() {
+    public void insertUser(List<TbUserInfo> userInfos, int batchSize) {
 
-        // 指定Session为BATCH状态，不自动提交
         SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH, false);
         UserInfoMapper userInfoMapper = sqlSession.getMapper(UserInfoMapper.class);
 
-        for (int i = 20; i <= 30; i++) {
-            TbUserInfo tbUserInfo = new TbUserInfo();
-            tbUserInfo.setUserId(i);
-            tbUserInfo.setLoginAccount("1");
-            tbUserInfo.setPassword("1" + i);
-            tbUserInfo.setUsername("1");
-            tbUserInfo.setDeptId(0);
-            tbUserInfo.setDataStatus("1");
-            tbUserInfo.setCreateBy("1");
-            tbUserInfo.setCreateTime(LocalDateTime.now());
-            tbUserInfo.setUpdateBy("1");
-            tbUserInfo.setUpdateTime(LocalDateTime.now());
-            tbUserInfo.setRecordVersion(0);
-            tbUserInfo.setUpdateCount(0);
-            userInfoMapper.insertUser(tbUserInfo);
+        int totalSize = userInfos.size();
+        int count = 1;
+
+        try {
+            for (TbUserInfo tbUserInfo : userInfos) {
+
+                userInfoMapper.insertUser(tbUserInfo);
+
+                // 每到batchSize执行一次，当count等于集合总数时执行
+                if (count % batchSize == 0 || count == totalSize) {
+                    sqlSession.commit();
+                }
+
+                count++;
+            }
+        } catch (Exception e) {
+            sqlSession.rollback();
+        } finally {
+            sqlSession.close();
         }
-        sqlSession.commit();
-        return true;
+
     }
 
 
