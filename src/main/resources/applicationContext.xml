@@ -31,6 +31,7 @@
         <!--其他配置-->
         <property name="configuration">
             <bean class="org.apache.ibatis.session.Configuration">
+                <!--开启列名转驼峰映射配置-->
                 <property name="mapUnderscoreToCamelCase" value="true"/>
                 <!--日志输出到控制台-->
                 <property name="logImpl" value="org.apache.ibatis.logging.stdout.StdOutImpl"/>
