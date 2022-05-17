@@ -24,4 +24,6 @@ public interface UserInfoMapper {
     List<UserRoleBO> selectRoleByCondition(TbUserInfo userInfo);
 
     void insertUser(TbUserInfo tbUserInfoList);
+
+    void deleteUserById(int userId);
 }

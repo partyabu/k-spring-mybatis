@@ -115,4 +115,33 @@ public class UserServiceImpl implements UserService {
         // int a = 1 / 0;
 
     }
+
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
+    public void deleteUsers(List<Integer> userIds, int batchSize) {
+
+        SqlSession sqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH, false);
+        UserInfoMapper userInfoMapper = sqlSession.getMapper(UserInfoMapper.class);
+
+        int totalSize = userIds.size();
+        int count = 1;
+
+        try {
+            for (int userId : userIds) {
+                userInfoMapper.deleteUserById(userId);
+                // 每到batchSize执行一次，当count等于集合总数时执行
+                if (count % batchSize == 0 || count == totalSize) {
+                    sqlSession.commit();
+                }
+
+                count++;
+            }
+        } catch (Exception e) {
+            sqlSession.rollback();
+        } finally {
+            sqlSession.close();
+        }
+
+    }
 }

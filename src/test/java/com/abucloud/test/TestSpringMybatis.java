@@ -11,6 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -116,5 +117,11 @@ public class TestSpringMybatis {
         userInfoList.add(tbUserInfo02);
 
         userService.insertUser(userInfoList, 1);
+    }
+
+    @Test
+    public void testDeleteBatch() {
+        UserService userService = ac.getBean(UserService.class);
+        userService.deleteUsers(Arrays.asList(157, 158, 159), 10);
     }
 }
