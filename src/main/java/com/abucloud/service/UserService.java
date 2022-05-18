@@ -27,4 +27,5 @@ public interface UserService {
 
     void deleteUsers(List<Integer> userIds, int batchSize);
 
+    void updateUserByConditions(TbUserInfo tbUserInfo);
 }

@@ -41,24 +41,26 @@ public class TestSpringMybatis {
         // 执行方法
 
         // 第一种，Mapper接口方式的调用，推荐这种使用方式。
-        Page<Object> pageResult = PageHelper.startPage(2, 2);
-        userService.selectList();
-        long total = pageResult.getTotal();
-        List<Object> result = pageResult.getResult();
+        // Page<TbUserInfo> pageResult = PageHelper.startPage(2, 2);
+        // userService.selectList();
+        // long total = pageResult.getTotal();
+        // List<TbUserInfo> result = pageResult.getResult();
 
-        //第二种，Mapper接口方式的调用，推荐这种使用方式。
-        Page<Object> pageResult02 = PageHelper.offsetPage(2, 2, false);
+       //第二种，Mapper接口方式的调用，推荐这种使用方式。
+        Page<TbUserInfo> pageResult02 = PageHelper.offsetPage(2, 2, false);
         userService.selectList();
         long total02 = pageResult02.getTotal();
-        List<Object> result02 = pageResult02.getResult();
+        List<TbUserInfo> result02 = pageResult02.getResult();
 
 
         // 第三种，lambda方式分页
-        TbUserInfo tbUserInfo = new TbUserInfo();
-        tbUserInfo.setLoginAccount("400B");
-        Page<Object> objects = PageHelper
-                .startPage(2, 2)
-                .doSelectPage(() -> userService.selectRoleByCondition(tbUserInfo));
+        // TbUserInfo tbUserInfo = new TbUserInfo();
+        // tbUserInfo.setLoginAccount("400B");
+        // Page<TbUserInfo> resultPage = PageHelper
+        //         .startPage(2, 2)
+        //         .doSelectPage(() -> userService.selectRoleByCondition(tbUserInfo));
+
+
     }
 
     @Test
@@ -123,5 +125,12 @@ public class TestSpringMybatis {
     public void testDeleteBatch() {
         UserService userService = ac.getBean(UserService.class);
         userService.deleteUsers(Arrays.asList(157, 158, 159), 10);
+    }
+
+    @Test
+    public void test05() {
+        UserService userService = ac.getBean(UserService.class);
+        TbUserInfo tbUserInfo = new TbUserInfo();
+        userService.updateUserByConditions(tbUserInfo);
     }
 }

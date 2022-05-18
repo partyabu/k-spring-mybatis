@@ -144,4 +144,9 @@ public class UserServiceImpl implements UserService {
         }
 
     }
+
+    @Override
+    public void updateUserByConditions(TbUserInfo tbUserInfo) {
+        this.userInfoMapper.updateByConditions(tbUserInfo);
+    }
 }

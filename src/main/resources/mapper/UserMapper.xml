@@ -29,6 +29,25 @@
     <insert id="insertOneUser">
 
     </insert>
+
+    <update id="updateByConditions">
+        UPDATE tb_user_info
+        SET login_account = #{loginAccount}
+        <where>
+            <choose>
+                <when test="dataStatus != null">
+                    data_status = #{dataStatus}
+                </when>
+                <when test="username != null">
+                    username = #{username}
+                </when>
+                <otherwise>
+                    dept_id = #{deptId}
+                </otherwise>
+            </choose>
+        </where>
+    </update>
+
     <delete id="deleteUserById">
     DELETE
     FROM
@@ -65,7 +84,10 @@
        WHERE
         user_id = #{userId}
     </select>
-    <!--
+    <select id="selectList" resultType="com.abucloud.bo.UserInfoBO">
+        select * from tb_user_info ORDER BY create_time DESC
+    </select>
+
      <select id="selectRoleByCondition" resultType="com.abucloud.bo.UserRoleBO">
          SELECT
          t1.user_id,
@@ -84,5 +106,6 @@
                  t1.login_account = #{loginAccount}
              </if>
          </where>
-     </select>-->
+     </select>
+
 </mapper>

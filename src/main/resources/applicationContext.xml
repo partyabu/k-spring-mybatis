@@ -56,7 +56,8 @@
         <property name="typeAliasesPackage" value="com/abucloud/entity"/>
     </bean>
 
-    <context:property-placeholder location="file:///D:\project\demo\k-spring-mybatis\src\main\resources\jdbc.properties"/>
+    <context:property-placeholder
+            location="file:///D:\project\demo\k-spring-mybatis\src\main\resources\jdbc.properties"/>
     <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
         <property name="jdbcUrl" value="${jdbc.url}"/>
         <property name="driverClassName" value="${jdbc.driver}"/>

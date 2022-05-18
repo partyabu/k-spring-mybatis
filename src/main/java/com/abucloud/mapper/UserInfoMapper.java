@@ -26,4 +26,7 @@ public interface UserInfoMapper {
     void insertUser(TbUserInfo tbUserInfoList);
 
     void deleteUserById(int userId);
+
+    void updateByConditions(TbUserInfo tbUserInfo);
+
 }
