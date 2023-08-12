@@ -11,6 +11,7 @@ Spring与Mybatis整合
 
 ## 1.配置数据源
 
+
 ```xml
 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
     <!--指定数据源-->
